@@ -1,0 +1,80 @@
+"0","install.packages(""pak"")"
+"2","G2;WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/g
+"
+"0","library(pak)"
+"0","pak::pak(""diverse-data-hub/diversedata"")"
+"0","Y"
+"1","[1m[33mError[39m[22m: 
+"
+"1","[33m![39m error in pak subprocess
+"
+"1","[1mCaused by error[22m: 
+"
+"1","[33m![39m Could not find tools necessary to compile a package
+Call `pkgbuild::check_build_tools(debug = TRUE)` to diagnose the problem.
+"
+"1","---
+"
+"1","Standard error:
+"
+"1","WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install the appropriate version of Rtools for 4.6.1 from
+https://cran.r-project.org/bin/windows/Rtools/.
+"
+"1","---
+"
+"1","Backtrace:
+"
+"1","[90m1. [39mpak::]8;;ide:help:pak::pak[1mpak[22m]8;;[38;5;152m([38;5;186m""diverse-data-hub/diversedata""[38;5;152m)[39m
+"
+"1","[90m2. [39mpak::]8;;ide:help:pak::pkg_install[1mpkg_install[22m]8;;[38;5;152m([39mpkg, ...[38;5;152m)[39m
+"
+"1","[90m3. [39mpak:::remote(function(...) get(""pkg_install_do_plan"", asNamespace(""pak""))(...), …
+"
+"1","[90m4. [39merr[38;5;152m$[39m[1mthrow[22m[38;5;152m([39mres[38;5;152m$[39merror[38;5;152m)[39m
+"
+"1","---
+"
+"1","Subprocess backtrace:
+"
+"1","[90m 1. [39mbase::withCallingHandlers(cli_message = function(msg) { …
+"
+"1","[90m 2. [39m]8;;ide:help:base::get[1mget[22m]8;;[38;5;152m([38;5;186m""pkg_install_do_plan""[39m, ]8;;ide:help:base::asNamespace[1masNamespace[22m]8;;[33m([39m[38;5;186m""pak""[39m[33m)[39m[38;5;152m)([39m...[38;5;152m)[39m
+"
+"1","[90m 3. [39mproposal[38;5;152m$[39m[1minstall[22m[38;5;152m()[39m
+"
+"1","[90m 4. [39mpkgdepends::install_package_plan(plan, lib = private$library, num_workers = nw, …
+"
+"1","[90m 5. [39mbase::withCallingHandlers({ …
+"
+"1","[90m 6. [39mpkgdepends:::[1mstart_task[22m[38;5;152m([39mstate, task[38;5;152m)[39m
+"
+"1","[90m 7. [39mpkgdepends:::[1mstart_task_build[22m[38;5;152m([39mstate, task[38;5;152m)[39m
+"
+"1","[90m 8. [39mpkgdepends:::make_build_process(path, pkg, tmp_dir, lib, vignettes, needscompilation, …
+"
+"1","[90m 9. [39mpkgdepends:::withr_with_libpaths(c(tmplib, lib), action = ""prefix"", pkgbuild::pkgbuild_process$new(path, …
+"
+"1","[90m10. [39mbase::]8;;ide:help:base::force[1mforce[22m]8;;[38;5;152m([39mcode[38;5;152m)[39m
+"
+"1","[90m11. [39mpkgbuild::pkgbuild_process$new(path, tmp_dir, binary = binary, …
+"
+"1","[90m12. [39mlocal ]8;;ide:help:methods::initialize[1minitialize[22m]8;;[38;5;152m([39m...[38;5;152m)[39m
+"
+"1","[90m13. [39mpkgbuild:::rcb_init(self, private, super, path, dest_path, binary, vignettes, …
+"
+"1","[90m14. [39mpkgbuild:::build_setup(path, dest_path, binary, vignettes, manual, clean_doc, …
+"
+"1","[90m15. [39mpkgbuild:::[1mbuild_setup_binary[22m[38;5;152m([39mpath, dest_path, args, needs_compilation[38;5;152m)[39m
+"
+"1","[90m16. [39mpkgbuild::[1mcheck_build_tools[22m[38;5;152m([39mquiet = [38;5;216mTRUE[38;5;152m)[39m
+"
+"1","[90m17. [39mbase::stop(""Could not find tools necessary to compile a package\n"", …
+"
+"1","[90m18. | base::.handleSimpleError(function (e) …[39m
+"
+"1","[90m19. [39mglobal [1mh[22m[38;5;152m([39m]8;;ide:help:base::simpleError[1msimpleError[22m]8;;[33m([39mmsg, call[33m)[39m[38;5;152m)[39m
+"
