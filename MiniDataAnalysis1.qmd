@@ -89,7 +89,7 @@ Write your findings here.
 #### Data Set 2
 
 ```{r}
-df_stone <- read_csv("C:\\Users\\Max Woest\\OneDrive - Baylor University\\Documents\\r class\\Assignments\\MiniDataAnalysis1\\dat\\RollingStone500.csv")
+df_stone <- read_csv("dat/RollingStone500.csv")
 glimpse(df_stone)
 
 ```
@@ -207,6 +207,11 @@ df_summarized <- df_rela |>
     mean = mean(age),
     min = min(age),
     max = max(age)
+  ) |>
+  pivot_longer(
+    cols = c(mean, min, max),
+    names_to = "stat",
+    values_to = "age"
   )
 
 df_summarized
@@ -266,12 +271,10 @@ Here is an example of a specific, explicit debug:
 
 ## Generative AI Statement
 
-Generative AI (through [LIST MODELS USED, i.e. ChatGPT, CoPilot)] was used to
+Generative AI ChatGPT was used to
 help me complete  this assignment in the following ways.
 
-1. [Describe here]
-
-2. [Describe here]
+1. I was having trouble with making a table including all proportions of missing values, so I asked AI to help me understand how to do this. It taught me the everything() function and the across() function. 
 
 ...
 
