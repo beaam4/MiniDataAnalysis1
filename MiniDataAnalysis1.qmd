@@ -118,7 +118,7 @@ Write your research questions **as questions**, and be specific. You can change 
 
 <!-------------------------- Start your work below ---------------------------->
 
-Is there a relationship between income and relationship quality? Does it differ by education?
+Is there a relationship between flirts with partner and age? Does it differ by income?
 
 <!----------------------------------------------------------------------------->
 
@@ -137,7 +137,11 @@ Your task is to create a table that calculates the proportion of missing values 
 <!-------------------------- Start your work below ---------------------------->
 
 ```{r}
-### Explore missingness here ###
+
+missing_table <- df_dating |>
+  summarize(across(everything(), ~ mean(is.na(.))))
+
+
 
 ```
 
@@ -154,6 +158,8 @@ Based on this definition, is missingness an issue for your analysis? If so, desc
 If missingness is not an issue, describe why.
 
 <!-------------------------- Start your work below ---------------------------->
+
+It is not an issue, missing counts for all columns are extremely low in general
 
 <!----------------------------------------------------------------------------->
 
@@ -177,9 +183,11 @@ Show the first 6 rows of the tidied data.
 
 ```{r}
 
-
-
-
+df_rela <- df_dating |>
+  select(subject_age, flirts_with_partner) |>
+  rename(age = subject_age) |>
+  na.omit() 
+head(df_rela, 6)
 ```
 
 <!----------------------------------------------------------------------------->
@@ -194,7 +202,14 @@ Show the outputted table.
 
 ```{r}
 
+df_summarized <- df_rela |>
+  summarize(
+    mean = mean(age),
+    min = min(age),
+    max = max(age)
+  )
 
+df_summarized
 
 
 ```
