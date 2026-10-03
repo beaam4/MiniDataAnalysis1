@@ -1,0 +1,535 @@
+# Mini Data-Analysis: Deliverable 1
+Max Woest
+
+Total points available: 74
+
+# Part 0: Getting Set Up
+
+Let’s get ready to work on this assignment!
+
+**0.1: Install Packages**
+
+- Install the [`diversedata`](https://diverse-data-hub.github.io/)
+  package by typing the following into your **R console**:
+
+<!-- -->
+
+    install.packages("pak")
+    library(pak)
+    pak::pak("diverse-data-hub/diversedata")
+
+**0.2: Load Packages**
+
+Typically, R Packages are loaded in at the very beginning of the
+analysis. If you later want to use other packages, please come back and
+add them here:
+
+``` r
+library(tidyverse)
+library(diversedata)
+library(moderndive)
+#--- Add any other packages below this line ---#
+```
+
+# Task 1: Choose a Data Set and Research Question
+
+You may use one of the datasets from class or one of the datasets from
+`diversedatahub`.
+
+- **boulder-housing**: This data set contains housing information for
+  the Boulder, Colorado area. *\[Add a second sentence here describing
+  what the data covers — e.g., the variables included or what question
+  it was collected to answer.\]*
+
+- **squirrel-census**: Thes\[[great NYC squirrel
+  census](https://www.thesquirrelcensus.com/),`squirrel-data.csv` –
+  squirrel sightings recorded around Manhattan and Brooklyn parks.
+
+- **rolling stone**: A [new visual
+  essay](https://pudding.cool/2024/03/greatest-music/) from The Pudding
+  compares Rolling Stone’s “500 Greatest Albums of All Time” lists from
+  2003, 2012, and 2020. A methodology note says the project began with a
+  spreadsheet by Chris Eckert and eventually led the authors to develop
+  a dataset of their own. Theirs lists every album in the rankings — its
+  name, genre, release year, 2003/2012/2020 rank, the artist’s name,
+  birth year, gender, and more — plus each year’s voters. \[h/t Jason
+  Kottke\]
+
+- **coffee census**: In 2023, [British
+  YouTuber](https://www.youtube.com/channel/UCMb0O2CdPBNi-QqPk5T3gsQ)
+  (and former [World Barista
+  Champion](https://www.jameshoffmann.co.uk/work#/coffee-competitions/))
+  James Hoffman virtually hosted the [Great American Coffee Taste
+  Test](https://www.youtube.com/watch?v=1fN_z4-EcOU), during which
+  thousands of people simultaneously blind-tasted the same four coffees.
+  Hoffman has published a [video summarizing the
+  results](https://www.youtube.com/watch?v=bMOOQfeloH0), as well as [a
+  spreadsheet of anonymized survey
+  responses](https://bit.ly/gacttCSV+)from 4,000+ participants. It
+  includes tasters’ demographics, general coffee drinking habits and
+  preferences, assessments of the four coffees, and more. \[h/t Dan
+  Brady\] (via
+  [data-is-plural](https://www.data-is-plural.com/archive/2023-11-15-edition/))
+
+- **wildfire**: This data set contains information on wildfires in
+  Canada, compiled from official government sources under the Open
+  Government Licence – Alberta. The data was gathered to monitor,
+  assess, and respond to wildfire risks across different regions.
+  Wildfires have far-reaching environmental, social, and economic
+  consequences. From an equity and inclusion perspective, analyzing
+  wildfire data can reveal geographic and resource-based disparities in
+  detection and containment efforts, and highlight how certain
+  populations face greater risks due to climate change and limited
+  infrastructure. There are 26551 rows and 35 columns.
+
+- **genderassessment**: Collected in 2023, the data allows for
+  comparative evaluation across countries, sectors, and ownership types
+  (e.g., Public, Private, Government). Each record represents a company
+  and its corresponding evaluation across 28 detailed gender related
+  indicators, offering a comprehensive snapshot of corporate gender
+  equity worldwide. There are 2000 rows and 29 variables
+
+- **hcmst**: This data set is adapted from the original data set [How
+  Couples Meet and Stay Together 2017,
+  2022](https://data.stanford.edu/hcmst2017). This study, led by
+  researchers from Stanford University, surveyed 1,722 U.S. adults in
+  2022 to explore how relationships form and change with time and
+  focused on dating habits and the impact of the COVID-19 pandemic on
+  relationships. This adapted data set focuses on variables that may
+  affect the quality of the relationship, considering demographic
+  characteristics of the subjects, couple dynamics, as well as
+  COVID-19-related variables. The COVID-19 pandemic had a [significant
+  impact](https://pmc.ncbi.nlm.nih.gov/articles/PMC10009005/) on
+  romantic relationships in the United States. This data set enables
+  exploration of how external factors, like the health of the subjects
+  and changes in income, as well as personal behaviors, like conflict
+  and intimate dynamics, relate to an individual’s perception of the
+  quality of the relationship. There are 1328 rows and 21 columns.
+
+- **womensmarchmadness**: This adapted data set contains historical
+  records of every NCAA Division I Women’s Basketball Tournament
+  appearance since the tournament began in 1982 up until 2018, capturing
+  tournament results across more than four decades of collegiate women’s
+  basketball. All data is sourced from the NCAA and contains the data
+  behind the story [The Rise and Fall Of Women’s NCAA Tournament
+  Dynasties](https://fivethirtyeight.com/features/louisiana-tech-was-the-uconn-of-the-80s/).
+  The rise in popularity of the NCAA Women’s March Madness, fueled by
+  athletes like Caitlin Clark and Paige Bueckers, reflects a broader
+  cultural shift in the recognition of women’s sports. Beyond
+  entertainment and athletic achievement, women’s participation in sport
+  has social and professional benefits. There are 2092 rows and 20
+  columns.
+
+*Note: We encourage you to use one of the options above, but if you have
+a data set that you’d really like to use, please check with a member of
+the teaching team to see whether the data set is of appropriate
+complexity. If approved, please add a brief description of the data
+here.*
+
+### 1.1: Choose 2 data sets **(2 points)**
+
+Out of the 5 data sets listed above, choose **2** that appeal to you
+based on their description. Write your choices below:
+
+<!-------------------------- Start your work below ---------------------------->
+
+1: hcmst
+
+2: Rolling stone
+
+<!----------------------------------------------------------------------------->
+
+### 1.2: Explore the Data **(12 points)**
+
+One way to narrowing down your selection is to *explore* the data sets.
+Use your knowledge of `dplyr` to summarize three variables in each of
+the data sets (for example, listing what levels of a categorical
+variable exist, or calculating the mean of a continuous variable of
+interest). Write a sentence that describes your findings for each
+variable explored. You may use multiple R code chunks if preferred.
+
+<!-------------------------- Start your work below ---------------------------->
+
+#### Data Set 1
+
+``` r
+df_dating <- read_csv("https://diverse-data-hub.github.io/data/clean/hcmst.csv")
+```
+
+    Rows: 1328 Columns: 21
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    chr (18): subject_education, subject_sex, subject_ethnicity, subject_income_...
+    dbl  (3): subject_age, relationship_duration, children
+
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+glimpse(df_dating)
+```
+
+    Rows: 1,328
+    Columns: 21
+    $ subject_age                <dbl> 53, 72, 43, 64, 60, 78, 51, 47, 62, 59, 66,…
+    $ subject_education          <chr> "high_school_grad", "some_college", "associ…
+    $ subject_sex                <chr> "female", "female", "male", "male", "female…
+    $ subject_ethnicity          <chr> "white", "white", "white", "white", "black"…
+    $ subject_income_category    <chr> "35k_40k", "75k_85k", "75k_85k", "75k_85k",…
+    $ subject_employment_status  <chr> "working_paid_employee", "working_paid_empl…
+    $ same_sex_couple            <chr> "no", "no", "no", "no", "no", "no", "no", "…
+    $ married                    <chr> "not_married", "married", "married", "marri…
+    $ sex_frequency              <chr> "once_or_twice_a_week", "once_a_month_or_le…
+    $ flirts_with_partner        <chr> "a_few_times_a_week", "never", "a_few_times…
+    $ fights_with_partner        <chr> "0_times", "7_or_more_times", "2_times", "0…
+    $ relationship_duration      <dbl> 1.5000000, 57.4166679, 22.3333340, 28.25000…
+    $ children                   <dbl> 2, 1, 5, 2, 3, 2, 3, 2, 2, 2, 2, 2, 2, 2, 1…
+    $ rel_change_during_pandemic <chr> "better_than_before", "no_change", "no_chan…
+    $ inc_change_during_pandemic <chr> "no_change", "worse", "worse", "no_change",…
+    $ subject_had_covid          <chr> "no", "no", "no", "no", "no", "no", "no", "…
+    $ partner_had_covid          <chr> "yes", "no", "no", "no", "no", "no", "no", …
+    $ subject_vaccinated         <chr> "not_vaccinated", "fully_vaccinated_and_boo…
+    $ partner_vaccinated         <chr> "not_vaccinated", "fully_vaccinated_and_boo…
+    $ agree_covid_approach       <chr> "completely_agree", "mostly_agree", "comple…
+    $ relationship_quality       <chr> "excellent", "good", "excellent", "good", "…
+
+Write your findings here.
+
+#### Data Set 2
+
+``` r
+df_stone <- read_csv("dat/RollingStone500.csv")
+```
+
+    New names:
+    Rows: 691 Columns: 26
+    ── Column specification
+    ──────────────────────────────────────────────────────── Delimiter: "," chr
+    (19): Sort Name, Clean Name, Album, Album Genre, Album Type, Wks on Bill... dbl
+    (7): 2003 Rank Old, 2003 Rank, 2012 Rank, 2020 Rank, 2020-2003 Differen...
+    ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+    Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    • `` -> `...25`
+    • `` -> `...26`
+
+``` r
+glimpse(df_stone)
+```
+
+    Rows: 691
+    Columns: 26
+    $ `Sort Name`                             <chr> "Sinatra, Frank", "Diddley, Bo…
+    $ `Clean Name`                            <chr> "Frank Sinatra", "Bo Diddley",…
+    $ Album                                   <chr> "In the Wee Small Hours", "Bo …
+    $ `2003 Rank Old`                         <dbl> 101, 212, 56, 302, 50, NA, NA,…
+    $ `2003 Rank`                             <dbl> 100, 214, 55, 306, 50, NA, NA,…
+    $ `2012 Rank`                             <dbl> 101, 216, 56, 308, 50, NA, 451…
+    $ `2020 Rank`                             <dbl> 282, 455, 332, NA, 227, 32, 33…
+    $ `2020-2003 Differential`                <dbl> -182, -241, -277, -195, -177, …
+    $ `Release Year`                          <dbl> 1955, 1955, 1956, 1956, 1957, …
+    $ `Album Genre`                           <chr> "Big Band/Jazz", "Rock n' Roll…
+    $ `Album Type`                            <chr> "Studio", "Studio", "Studio", …
+    $ `Wks on Billboard`                      <chr> "14", "-", "100", "?", "5", "8…
+    $ `Peak Billboard Position`               <dbl> 2, 201, 1, 2, 13, 1, 2, 201, 3…
+    $ `Spotify Popularity`                    <chr> "48", "50", "58", "62", "64", …
+    $ `Spotify URI`                           <chr> "spotify:album:3GmwKB1tgPZgXeR…
+    $ `Chartmetric Link`                      <chr> "https://app.chartmetric.com/a…
+    $ `Artist Member Count`                   <chr> "1", "1", "1", "1", "1", "1", …
+    $ `Artist Gender`                         <chr> "Male", "Male", "Male", "Male"…
+    $ `Artist Birth Year Sum`                 <chr> "1915", "1928", "1935", "1915"…
+    $ `Debut Album Release Year`              <chr> "1946", "1955", "1956", "1946"…
+    $ `Avg. Age at Top 500 Album`             <chr> "40", "27", "21", "41", "25", …
+    $ `Years Between Debut and Top 500 Album` <chr> "9", "0", "0", "10", "0", "13"…
+    $ `Album ID`                              <chr> "3GmwKB1tgPZgXeRJZSm9WX", "1cb…
+    $ `Album ID Quoted`                       <chr> "\"3GmwKB1tgPZgXeRJZSm9WX\",",…
+    $ ...25                                   <chr> NA, NA, NA, NA, NA, NA, NA, NA…
+    $ ...26                                   <chr> NA, NA, NA, NA, NA, NA, NA, NA…
+
+Write your findings here.
+
+<!----------------------------------------------------------------------------->
+
+### 1.3: Choose 1 Data Set **(2 points)**
+
+It’s time to choose only one data set. State the data set that you’ve
+chosen, and why you’ve chosen it.
+
+<!-------------------------- Start your work below ---------------------------->
+
+I want to use the hcmst data set because I am currently working on
+developing a dating app for Baylor students and this is somewhat in the
+same field of the current research I am doing.
+
+<!----------------------------------------------------------------------------->
+
+### 1.4: Research Question **(4 points)**
+
+Let’s choose a primary and a secondary research question to explore.
+
+Write your research questions **as questions**, and be specific. You can
+change it later if needed.
+
+> For example, if I had chosen a `titanic` data set for my project, I
+> might ask, “(Primary) Is there a relationship between survival and the
+> class of the passengers? (Secondary) Does this relationship differ by
+> gender?”
+
+<!-------------------------- Start your work below ---------------------------->
+
+Is there a relationship between flirts with partner and age? Does it
+differ by income?
+
+<!----------------------------------------------------------------------------->
+
+### 1.5: Commit **(2 points)**
+
+Commit your work and push it to GitHub. Include an informative commit
+message, and include “(1.5)” in the message.
+
+# Task 2: Further Exploring Your Chosen Data Set
+
+### 2.1: Missing Data **(6 points)**
+
+Missing data is inevitable, and can complicate analyses. Let’s see what
+variables (if any) have missing data in your chosen data set.
+
+Your task is to create a table that calculates the proportion of missing
+values per variable. Be sure to output the table.
+
+<!-------------------------- Start your work below ---------------------------->
+
+``` r
+missing_table <- df_dating |>
+  summarize(across(everything(), ~ mean(is.na(.))))
+```
+
+<!----------------------------------------------------------------------------->
+
+### 2.2: Missing Data (Again) **(6 points)**
+
+Based on your research question, will this missingness pose an issue?
+For the purposes of this class (and this class only!), we will consider
+missingness a problem **if there is more than 20% of a single variable
+(that is of interest) is missing**.
+
+> For example, let’s assume I wanted to explore the following research
+> questions: “Is there a relationship between survival and the class of
+> the passengers? Does this relationship vary by gender?”. If the
+> variable indicating whether or not a person survived was missing for
+> 20% or more of the passengers, then this would be a problem. However,
+> if a variable indicating the colour of shirt a passenger was wearing
+> was missing, this probably wouldn’t be an issue as that variable is
+> quite irrelevant to my analysis!
+
+Based on this definition, is missingness an issue for your analysis? If
+so, describe how you will address this (pivoting your research question,
+for example). If you will continue with a new research question, write
+it here! **Do not go back to Task 1 and redo the analysis.** ).
+
+If missingness is not an issue, describe why.
+
+<!-------------------------- Start your work below ---------------------------->
+
+It is not an issue, missing counts for all columns are extremely low in
+general
+
+<!----------------------------------------------------------------------------->
+
+### 2.3: Tidy your Data **(10 points)**
+
+Produce a tidy data set that could be used to answer your research
+questions. **Please ensure you have at least one quantitative (numeric)
+and one categorical variable in your data set. It’s okay you need to
+include a less relevant variable in your tidied data to ensure this.**
+
+To tidy your data, you should:
+
+- Create new variables (if needed)
+
+- Transform the data into a tidy form (if needed)
+
+- Remove irrelevant columns (if needed)
+
+- Comment your code throughout
+
+Show the first 6 rows of the tidied data.
+
+<!-------------------------- Start your work below ---------------------------->
+
+``` r
+df_rela <- df_dating |>
+  select(subject_age, flirts_with_partner) |>
+  rename(age = subject_age) |>
+  na.omit() 
+head(df_rela, 6)
+```
+
+    # A tibble: 6 × 2
+        age flirts_with_partner   
+      <dbl> <chr>                 
+    1    53 a_few_times_a_week    
+    2    72 never                 
+    3    43 a_few_times_a_week    
+    4    64 1_to_3_times_a_month  
+    5    60 a_few_times_a_week    
+    6    78 less_than_once_a_month
+
+<!----------------------------------------------------------------------------->
+
+### 2.4: Create a Table (10 points)
+
+Use any functions from the `tidyverse` to create one table that outputs
+the mean, minimum, and maximum of all numeric columns in your data,
+dropping the missing values if they exist.
+
+Show the outputted table.
+
+<!-------------------------- Start your work below ---------------------------->
+
+``` r
+df_summarized <- df_rela |>
+  summarize(
+    mean = mean(age),
+    min = min(age),
+    max = max(age)
+  ) |>
+  pivot_longer(
+    cols = c(mean, min, max),
+    names_to = "stat",
+    values_to = "age"
+  )
+
+df_summarized
+```
+
+    # A tibble: 3 × 2
+      stat    age
+      <chr> <dbl>
+    1 mean   55.8
+    2 min    23  
+    3 max    98  
+
+<!----------------------------------------------------------------------------->
+
+### 2.5: Commit **(2 points)**
+
+Commit your work and push it to GitHub. , and include “(2.7)” in the
+message.
+
+# Task 3: Tidy Your Submission Overall
+
+Check over your document and GitHub repository for the following:
+
+### 3.1: Coherence **(2 points)**
+
+The document should read sensibly from top to bottom, with no major
+continuity errors. An example of a major continuity error is having a
+data set listed for Task 3 that is not part of one of the data sets
+listed in Task 1.
+
+### 3.2: Error-free code **(2 points)**
+
+For full marks, all code in the document should run without error and be
+completely reproducible.
+
+### 3.3 README **(6 points)**
+
+There should be a file named `README.md` at the top level of your
+repository. Its contents should automatically appear when you visit the
+repository on GitHub.
+
+Minimum contents of the README file:
+
+- In a sentence or two, explains what this repository is, so that
+  future-you or someone else stumbling on your repository can be
+  oriented to the repository.
+- List the files/folders contained in the repository
+- In a sentence or two, briefly explains how to engage with the
+  repository. You can assume the person reading knows the material from
+  STAT 545A. Basically, if a visitor to your repository wants to explore
+  your project, what should they know? How can they reproduce your
+  report?
+
+### 3.4 Generative AI Disclosure **(3 points)**
+
+In this course, Generative AI can be used in the following ways:
+
+- to clarify concepts discussed in class
+
+- as an “advanced search engine” (i.e., searching error codes)
+
+- debugging code that students wrote and attempted to debug on their own
+
+Generative AI **CANNOT** be used to generate text or code (including
+comments) from scratch.
+
+Any use of Generative AI must be disclosed.
+
+**To disclose your use, please copy and paste the following template
+into the README of your GitHub Repository and fill out the relevant
+details** \[in square brackets\]. BE SPECIFIC. Saying you used it to
+debug your code is not enough. Explicitly describe where you got stuck
+
+Here is an example of a specific, explicit debug:
+
+> “I had the error `attempt to apply non-function` after running my
+> code. I used Claude to help me identify that this error was due to me
+> attempting to multiply two numbers together without the use of a `*`,
+> i.e. `(2)(3)` instead of `2*3`.”
+
+``` markdown
+
+## Generative AI Statement
+
+Generative AI ChatGPT was used to
+help me complete  this assignment in the following ways.
+
+1. I was having trouble with making a table including all proportions of missing values, so I asked AI to help me understand how to do this. It taught me the everything() function and the across() function. 
+
+2. I had quite a few issues with github as well, specifically I had trouble committing and pushing to my github. I did use AI to help me troubleshoot.
+
+...
+
+I affirm that Generative AI was not used to generate text, code, or comments for
+my assessments.
+```
+
+If you did not use Generative AI, please include the following in your
+README:
+
+``` markdown
+
+## Generative AI Statement
+
+Generative AI was not used in any way throughout this assignment.
+```
+
+Assessments suspected of having AI-generated text and/or code, or
+assignments where the Generative AI use was not disclosed, will be
+flagged and temporarily assigned a grade of zero. Students will be
+required to meet with the instructor to receive a grade.
+
+### 3.5 Output **(4 points)**
+
+All output on GitHub is readable, recent and relevant:
+
+- All `.qmd` files have been rendered to their output `.md` files.
+- All rendered `.md` files are viewable without errors on Github.
+  Examples of errors: Missing plots, “Sorry about that, but we can’t
+  show files that are this big right now” messages, error messages from
+  broken R code
+- All of these output files are up-to-date – that is, they haven’t
+  fallen behind after the source (`.qmd`) files have been updated.
+- There should be no relic output files. For example, if you were
+  rendering a `.qmd` to `.html`, but then changed the output to be only
+  a markdown file, then the `.html` file is a relic and should be
+  deleted.
+
+# Step 4: Submission
+
+\*\* Submit repo link \*\*
+
+To submit this milestone, submit the github link to the repo.
+
+This assignment was authored by the team of instructors at University of
+British Colombia’s STA 545 class.

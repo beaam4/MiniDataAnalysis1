@@ -1,7 +1,7 @@
 ---
 title: "Mini Data-Analysis: Deliverable 1"
 format: gfm
-author: "Your name here"
+author: "Max Woest"
 ---
 
 Total points available: 74
@@ -275,6 +275,8 @@ Generative AI ChatGPT was used to
 help me complete  this assignment in the following ways.
 
 1. I was having trouble with making a table including all proportions of missing values, so I asked AI to help me understand how to do this. It taught me the everything() function and the across() function. 
+
+2. I had quite a few issues with github as well, specifically I had trouble committing and pushing to my github. I did use AI to help me troubleshoot.
 
 ...
 
