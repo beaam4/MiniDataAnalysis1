@@ -63,9 +63,9 @@ Out of the 5 data sets listed above, choose **2** that appeal to you based on th
 
 <!-------------------------- Start your work below ---------------------------->
 
-1: Write 1st choice here
+1: hcmst
 
-2: Write 2nd choice here
+2: Rolling stone
 
 <!----------------------------------------------------------------------------->
 
@@ -78,7 +78,9 @@ One way to narrowing down your selection is to *explore* the data sets. Use your
 #### Data Set 1
 
 ```{r}
-### Explore 3 variables of data set 1 ###
+df_dating <- read_csv("https://diverse-data-hub.github.io/data/clean/hcmst.csv")
+
+glimpse(df_dating)
 
 ```
 
@@ -87,7 +89,8 @@ Write your findings here.
 #### Data Set 2
 
 ```{r}
-### Explore 3 variables of data set 2 ###
+df_stone <- read_csv("C:\\Users\\Max Woest\\OneDrive - Baylor University\\Documents\\r class\\Assignments\\MiniDataAnalysis1\\dat\\RollingStone500.csv")
+glimpse(df_stone)
 
 ```
 
@@ -101,6 +104,8 @@ It's time to choose only one data set. State the data set that you've chosen, an
 
 <!-------------------------- Start your work below ---------------------------->
 
+I want to use the hcmst data set because I am currently working on developing a dating app for Baylor students and this is somewhat in the same field of the current research I am doing.
+
 <!----------------------------------------------------------------------------->
 
 ### 1.4: Research Question **(4 points)**
@@ -112,6 +117,8 @@ Write your research questions **as questions**, and be specific. You can change 
 > For example, if I had chosen a `titanic` data set for my project, I might ask, "(Primary) Is there a relationship between survival and the class of the passengers? (Secondary) Does this relationship differ by gender?"
 
 <!-------------------------- Start your work below ---------------------------->
+
+Is there a relationship between income and relationship quality? Does it differ by education?
 
 <!----------------------------------------------------------------------------->
 
